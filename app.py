@@ -2,7 +2,6 @@ import streamlit as st
 import requests
 from bs4 import BeautifulSoup
 import time
-import json
 
 # --- KONFIGURACJA STRONY ---
 st.set_page_config(page_title="Lyreco AI SEO Agent", page_icon="🟢", layout="wide")
@@ -56,7 +55,8 @@ def scrape_lyreco(url):
 
 # --- MOCKUP AI (Demo Response) ---
 def get_mock_ai_response():
-    return """
+    # Używamy prostszego formatowania stringa, żeby uniknąć błędów
+    response = """
 ### 🟢 SEKCJA 1: AI SNAPSHOT (Google SGE)
 **Bostik Blu Tack (Economy Pack)** to wielorazowa masa mocująca, stanowiąca bezpieczną alternatywę dla taśm i pinezek. Idealna do biur (montaż ogłoszeń bez niszczenia ścian) i zabezpieczania sprzętu przed przesuwaniem.
 
