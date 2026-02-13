@@ -74,7 +74,7 @@ def get_mock_ai_response():
   "surface_safety": "non-damaging",
   "application": ["mounting", "cleaning", "stabilizing"]
 }
-""" return response
+"" return response
 
 --- 4. INTERFEJS ---
 st.title("🚀 Lyreco GEO & Agentic Optimizer") st.info("Narzędzie do transformacji opisów produktów pod Generative Engine Optimization.")
