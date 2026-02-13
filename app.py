@@ -3,10 +3,9 @@ import requests
 from bs4 import BeautifulSoup
 import time
 
-# --- KONFIGURACJA STRONY ---
+# --- 1. KONFIGURACJA STRONY ---
 st.set_page_config(page_title="Lyreco AI SEO Agent", page_icon="🟢", layout="wide")
 
-# --- STYLE CSS ---
 st.markdown("""
     <style>
     .main {background-color: #f5f5f5;}
@@ -15,7 +14,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# --- FUNKCJA SCRAPERA ---
+# --- 2. FUNKCJA SCRAPERA ---
 def scrape_lyreco(url):
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
@@ -53,9 +52,9 @@ def scrape_lyreco(url):
     except Exception as e:
         return None, str(e)
 
-# --- MOCKUP AI (Demo Response) ---
+# --- 3. MOCKUP AI (Demo Response) ---
 def get_mock_ai_response():
-    # Używamy prostszego formatowania stringa, żeby uniknąć błędów
+    # Tutaj jest ten tekst, który sprawiał problemy. Teraz jest bezpieczny.
     response = """
 ### 🟢 SEKCJA 1: AI SNAPSHOT (Google SGE)
 **Bostik Blu Tack (Economy Pack)** to wielorazowa masa mocująca, stanowiąca bezpieczną alternatywę dla taśm i pinezek. Idealna do biur (montaż ogłoszeń bez niszczenia ścian) i zabezpieczania sprzętu przed przesuwaniem.
@@ -75,3 +74,33 @@ def get_mock_ai_response():
   "surface_safety": "non-damaging",
   "application": ["mounting", "cleaning", "stabilizing"]
 }
+""" return response
+
+--- 4. INTERFEJS ---
+st.title("🚀 Lyreco GEO & Agentic Optimizer") st.info("Narzędzie do transformacji opisów produktów pod Generative Engine Optimization.")
+
+col1, col2 = st.columns([3, 1])
+
+with col1: url_input = st.text_input("Wklej URL produktu (Lyreco UK):", value="https://shop.lyreco.co.uk/en/product/719.594/bostik-blu-tack-economy-120g-pack")
+
+with col2: st.write("") st.write("") generate_btn = st.button("Uruchom Agenta")
+
+if generate_btn: with st.spinner('Analizuję strukturę strony Lyreco...'): # A. Pobieranie data, error = scrape_lyreco(url_input)
+
+    if error:
+        st.error(f"Błąd: {error}")
+    else:
+        # B. Symulacja AI
+        time.sleep(1.5)
+        ai_output = get_mock_ai_response()
+        
+        # C. Wyniki
+        st.success("Analiza zakończona pomyślnie!")
+        
+        tab1, tab2 = st.tabs(["🟢 WYNIK AI (GEO Optimized)", "🔴 DANE SUROWE (Robot View)"])
+        
+        with tab1:
+            st.markdown(ai_output)
+        
+        with tab2:
+            st.text_area("Co pobrał scraper:", value=data, height=300)
